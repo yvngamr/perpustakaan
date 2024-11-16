@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Data Pendaftaran</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Data Pendaftaran Pengguna</h1>
+
+    <button id="loadDataBtn">Tampilkan Data</button>
+
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Telepon</th>
+                <th>Alamat</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data akan ditampilkan di sini -->
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('loadDataBtn').addEventListener('click', function() {
+            // Ambil data dari localStorage
+            const storedData = JSON.parse(localStorage.getItem('formData')) || [];
+            const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+
+            // Kosongkan tabel sebelum menampilkan data baru
+            tableBody.innerHTML = '';
+
+            // Menampilkan data dalam tabel
+            storedData.forEach((data) => {
+                const row = tableBody.insertRow();
+                row.insertCell(0).textContent = data.name;
+                row.insertCell(1).textContent = data.email;
+                row.insertCell(2).textContent = data.phone;
+                row.insertCell(3).textContent = data.address;
+            });
+        });
+        
+        //localStorage
+        const data = JSON.parse(localStorage.getItem('formData'));
+        console.log(data);  // Menampilkan data di console
+
+        const dataContainer = document.getElementById('dataContainer');
+        
+        if (data) {
+            data.forEach((entry) => {
+                const dataDiv = document.createElement('div');
+                dataDiv.innerHTML = `
+                    <p><strong>Nama:</strong> ${entry.name}</p>
+                    <p><strong>Email:</strong> ${entry.email}</p>
+                    <p><strong>Telepon:</strong> ${entry.phone}</p>
+                    <p><strong>Alamat:</strong> ${entry.address}</p>
+                    <hr>
+                `;
+                dataContainer.appendChild(dataDiv);
+            });
+        } else {
+            dataContainer.innerHTML = 'Tidak ada data ditemukan!';
+        }
+    </script>
+</body>
+</html>

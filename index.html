@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perpustakaan Sekolah Modern - Jendela Ilmu Pengetahuan</title>
+    <meta name="description" content="Perpustakaan Sekolah Modern menyediakan akses ke berbagai koleksi buku, e-book, dan sumber daya digital untuk mendukung pembelajaran dan literasi.">
+    <meta property="og:title" content="Perpustakaan Sekolah Modern - Jendela Ilmu Pengetahuan">
+    <meta property="og:description" content="Jelajahi dunia pengetahuan melalui koleksi buku dan sumber daya digital kami yang luas.">
+    <meta property="og:image" content="https://example.com/images/library-og-image.jpg">
+    <meta property="og:url" content="https://www.perpustakaansekolahmodern.com">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="https://via.placeholder.com/50" alt="Logo Perpustakaan">
+                <span>Perpustakaan Modern</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Beranda</a></li>
+                 <li><a href="#tentang">Tentang</a></li>
+                  <li><a href="#organigram">Struktur</a></li>
+                <li><a href="#koleksi">Koleksi</a></li>
+                <li><a href="#layanan">Layanan</a></li>
+                <li><a href="#fasilitas">Fasilitas</a></li>
+                <li><a href="#acara">Acara</a></li>
+                <li><a href="#daftar">Daftar Anggota</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" placeholder="Cari buku...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h1>Selamat Datang di Perpustakaan Sekolah Modern</h1>
+            <p>Membuka Jendela Dunia dengan Membaca</p>
+            <div class="cta-buttons">
+                <a href="#koleksi" class="btn">Lihat Koleksi Kami</a>
+                <a href="#daftar" class="btn">Daftar Anggota</a>
+            </div>
+        </section>
+   <section id="tentang" class="about">
+            <h2>Kenapa Harus Membaca?</h2>
+            <p>Perpustakaan ini didirikan dengan tujuan untuk memberikan akses ilmu pengetahuan kepada seluruh masyarakat. Kami menyediakan berbagai koleksi buku, jurnal, dan sumber digital untuk mendukung kebutuhan pendidikan, penelitian, dan pengembangan pribadi</p>
+            <div class="vision-mission">
+                <h3>Visi</h3>
+                <p>Membudayakan membaca untuk mencerdaskan bangsa.</p>
+                <h3>Misi</h3>
+                <ul>
+                    <li>Menyediakan akses informasi dan literatur.</li>
+                    <li>Memfasilitasi pembelajaran sepanjang hayat.</li>
+                    <li>Meningkatkan keterlibatan masyarakat melalui kegiatan literasi.</li>
+                </ul>
+                </div>
+                </section>
+                
+     <section id="organigram" class="team">
+  <h2>Struktur Organigram Perpustakaan</h2>
+  <div class="team-grid">
+    <!-- Anggota Tim 1 -->
+    <div class="team-item">
+      <img src="foto-kepala.jpg" alt="Kepala Perpustakaan" class="team-photo">
+      <h3>Udin</h3>
+      <p>Kepala Perpustakaan</p>
+      <a href="https://instagram.com/udinofficial" target="_blank" class="social-link">
+        <i class="fab fa-instagram"></i> @udinofficial
+      </a>
+    </div>
+    <!-- Anggota Tim 2 -->
+    <div class="team-item">
+      <img src="foto-staf.jpg" alt="Staf Perpustakaan" class="team-photo">
+      <h3>Ani</h3>
+      <p>Staf Administrasi</p>
+      <a href="https://instagram.com/ani_staf" target="_blank" class="social-link">
+        <i class="fab fa-instagram"></i> @ani_staf
+      </a>
+    </div>
+    <!-- Anggota Tim 3 -->
+    <div class="team-item">
+      <img src="foto-pustakawan.jpg" alt="Pustakawan" class="team-photo">
+      <h3>Budi</h3>
+      <p>Pustakawan</p>
+      <a href="https://instagram.com/budi.library" target="_blank" class="social-link">
+        <i class="fab fa-instagram"></i> @budi.library
+      </a>
+    </div>
+  </div>
+</section>
+
+        <section id="koleksi" class="collection">
+            <h2>Koleksi Buku & Media</h2>
+            <div class="categories">
+                <span class="category active" data-category="semua">Semua</span>
+                <span class="category" data-category="fiksi">Fiksi</span>
+                <span class="category" data-category="non-fiksi">Non-fiksi</span>
+                <span class="category" data-category="anak">Buku Anak</span>
+                <span class="category" data-category="langka">Buku Langka</span>
+                <span class="category" data-category="ebook">e-Book</span>
+            </div>
+            <div class="book-container">
+                <div class="book-list active" id="semua">
+                    <!-- All books will be displayed here -->
+                </div>
+                <div class="book-list" id="fiksi">
+                    <!-- Fiction books -->
+                </div>
+                <div class="book-list" id="non-fiksi">
+                    <!-- Non-fiction books -->
+                </div>
+                <div class="book-list" id="anak">
+                    <!-- Children's books -->
+                </div>
+                <div class="book-list" id="langka">
+                    <!-- Rare books -->
+                </div>
+                <div class="book-list" id="ebook">
+                    <!-- E-books -->
+                </div>
+            </div>
+            <button id="showMoreBooks" class="btn">Selengkapnya</button>
+        </section>
+
+        <section id="layanan" class="services">
+            <h2>Layanan yang Kami Sediakan</h2>
+            <div class="service-grid">
+                <div class="service-item">
+                    <i class="fas fa-book"></i>
+                    <h3>Pinjam & Kembalikan Buku</h3>
+                    <p>Sistem peminjaman dan pengembalian buku yang mudah dan efisien.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-laptop"></i>
+                    <h3>Akses e-Book</h3>
+                    <p>Baca ribuan e-book dari berbagai genre kapan saja, di mana saja.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>Program Literasi</h3>
+                    <p>Ikuti program literasi kami untuk meningkatkan kemampuan membaca dan menulis.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-users"></i>
+                    <h3>Klub Buku</h3>
+                    <p>Bergabunglah dengan klub buku kami dan diskusikan buku-buku favorit Anda.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="fasilitas" class="facilities">
+            <h2>Fasilitas Kami</h2>
+            <div class="facilities-grid">
+                <div class="facility-item">
+                    <i class="fas fa-wifi"></i>
+                    <h3>Wi-Fi Gratis</h3>
+                    <p>Akses internet cepat untuk penelitian dan pembelajaran online.</p>
+                </div>
+                <div class="facility-item">
+                    <i class="fas fa-laptop"></i>
+                    <h3>Ruang Komputer</h3>
+                    <p>Komputer modern untuk mengakses sumber daya digital.</p>
+                </div>
+                <div class="facility-item">
+                    <i class="fas fa-users"></i>
+                    <h3>Ruang Diskusi</h3>
+                    <p>Area nyaman untuk belajar kelompok dan kolaborasi.</p>
+                </div>
+                <div class="facility-item">
+                    <i class="fas fa-coffee"></i>
+                    <h3>Kafe Baca</h3>
+                    <p>Nikmati makanan ringan sambil membaca buku favorit Anda.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="acara" class="events">
+            <h2>Acara Mendatang</h2>
+            <div class="event-list">
+                <div class="event-item">
+                    <div class="event-date">
+                        <span class="day">15</span>
+                        <span class="month">Jul</span>
+                    </div>
+                    <div class="event-details">
+                        <h3>Workshop Menulis Kreatif</h3>
+                        <p>Belajar teknik menulis kreatif dari penulis terkenal.</p>
+                        <a href="#" class="btn">Daftar</a>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">
+                        <span class="day">22</span>
+                        <span class="month">Jul</span>
+                    </div>
+                    <div class="event-details">
+                        <h3>Diskusi Buku: "Laskar Pelangi"</h3>
+                        <p>Mari bergabung dalam diskusi novel inspiratif karya Andrea Hirata.</p>
+                        <a href="#" class="btn">Daftar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="daftar" class="register">
+            <h2>Daftar Anggota</h2>
+            <form id="registerForm" class="register-form">
+                <div class="form-group">
+                    <label for="name">Nama Lengkap</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Nomor Telepon</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Alamat</label>
+                    <textarea id="address" name="address" required></textarea>
+                </div>
+                <button type="submit" class="btn">Daftar Sekarang</button>
+            </form>
+        </section>
+
+        <section id="testimoni" class="testimonials">
+            <h2>Apa Kata Pengunjung?</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-item">
+                    <p>"Perpustakaan ini sangat membantu dalam studi saya. Koleksi bukunya lengkap dan fasilitasnya nyaman!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://via.placeholder.com/50" alt="Foto Andi">
+                        <span>Andi, Mahasiswa</span>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Saya suka menghabiskan waktu di sini. Suasananya tenang dan cocok untuk membaca atau belajar."</p>
+                    <div class="testimonial-author">
+                        <img src="https://via.placeholder.com/50" alt="Foto Siti">
+                        <span>Siti, Pelajar SMA</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <h2>Ayo Mulai Perjalanan Membaca Anda!</h2>
+            <div class="cta-buttons">
+                <a href="#koleksi" class="btn">Jelajahi Koleksi</a>
+                <a href="#daftar" class="btn">Daftar Sekarang</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Tentang Kami</h3>
+                <p>Perpustakaan Sekolah Modern adalah pusat pembelajaran dan literasi yang menyediakan akses ke pengetahuan untuk semua.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Kontak</h3>
+                <p>Email: info@perpustakaanmodern.com</p>
+                <p>Telepon: (021) 1234-5678</p>
+                <p>Alamat: Jl. Pendidikan No. 123, Kota Belajar</p>
+            </div>
+            <div class="footer-section">
+                <h3>Ikuti Kami</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Perpustakaan Sekolah Modern. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
+    <script src="script.js"></script>
+    <script src="form.js"></script>
+</body>
+</html>
