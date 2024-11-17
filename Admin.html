@@ -5,90 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Data Pendaftaran</title>
     <style>
-        /* Reset styles */
-        * {
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            background-color: #f3f4f6;
         }
 
-        /* Basic styling */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7fc;
-            margin: 0;
-        }
-
-        /* Navbar */
         .navbar {
-            background-color: #1a73e8;
-            padding: 15px 20px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .navbar h1 {
-            color: white;
-            font-size: 24px;
-            margin: 0;
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: bold;
         }
 
-        .navbar a {
-            color: white;
-            text-decoration: none;
+        .navbar .admin-greet {
             font-size: 16px;
-            padding: 10px 15px;
-            background-color: #1558b0;
-            border-radius: 5px;
-            transition: background-color 0.3s;
         }
 
-        .navbar a:hover {
-            background-color: #0f4893;
-        }
-
-        /* Admin dashboard container */
-        .dashboard-container {
-            padding: 30px;
-            margin-top: 20px;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
+        .container {
             max-width: 1200px;
             margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
 
-        h2 {
-            color: #1a73e8;
-            margin-bottom: 20px;
+        h1 {
+            color: #333;
             text-align: center;
-        }
-
-        .btn {
-            background-color: #1a73e8;
-            color: white;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #1558b0;
-        }
-
-        .table-container {
-            margin-top: 30px;
-            overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
 
         table, th, td {
@@ -100,136 +59,101 @@
             text-align: left;
         }
 
-        .action-btns button {
-            padding: 5px 10px;
-            margin: 0 5px;
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
         }
 
-        .delete-btn {
-            background-color: #f44336;
-            color: white;
+        button:hover {
+            background-color: #0056b3;
         }
 
-        .delete-btn:hover {
-            background-color: #d32f2f;
-        }
-
-        .footer {
+        .text-center {
             text-align: center;
-            margin-top: 40px;
-            font-size: 12px;
-            color: #777;
         }
-
-        @media (max-width: 768px) {
-            .navbar h1 {
-                font-size: 20px;
-            }
-
-            .btn {
-                font-size: 14px;
-                padding: 8px 16px;
-            }
-
-            .table-container {
-                margin-top: 20px;
-            }
-
-            .dashboard-container {
-                padding: 20px;
-            }
-        }
-
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-
     <!-- Navbar -->
     <div class="navbar">
-        <h1>Admin Dashboard</h1>
-        <a href="login.html" id="logoutBtn">Logout</a>
+        <div class="logo">Admin Panel</div>
+        <div class="admin-greet">Hi Admin</div>
     </div>
 
-    <!-- Dashboard Content -->
-    <div class="dashboard-container">
-        <h2>Data Pendaftaran Pengguna</h2>
-
-        <button class="btn" id="loadDataBtn">Tampilkan Data</button>
-        <button class="btn" id="downloadPdfBtn">Download Data (PDF)</button>
-
-        <div class="table-container">
-            <table id="dataTable">
-                <thead>
-                    <tr>
-                        <th>Nama</th>
-                        <th>Email</th>
-                        <th>Telepon</th>
-                        <th>Alamat</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Data akan ditampilkan di sini -->
-                </tbody>
-            </table>
+    <!-- Container -->
+    <div class="container">
+        <h1>Data Pendaftaran Pengguna</h1>
+        <div class="text-center">
+            <button id="loadDataBtn">Tampilkan Data</button>
+            <button id="downloadPdfBtn">Download Data (PDF)</button>
         </div>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Telepon</th>
+                    <th>Alamat</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data akan ditampilkan di sini -->
+            </tbody>
+        </table>
     </div>
-
-    <div class="footer">
-        <p>&copy; 2024 Sistem Admin Perpustakaan</p>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <script>
-        // Cek jika pengguna sudah login
-        if (!sessionStorage.getItem('isLoggedIn')) {
-            window.location.href = 'login.html';
-        }
-
-        const adminName = sessionStorage.getItem('adminName');
-        document.querySelector('.navbar h1').innerText = `Hi, ${adminName}`;
-
-        // Menampilkan data dari localStorage
-        document.getElementById('loadDataBtn').addEventListener('click', function() {
+        // Tampilkan data dari localStorage ke tabel
+        document.getElementById('loadDataBtn').addEventListener('click', function () {
             const storedData = JSON.parse(localStorage.getItem('formData')) || [];
             const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
-            tableBody.innerHTML = ''; // Kosongkan tabel sebelumnya
 
+            // Kosongkan tabel sebelum menampilkan data baru
+            tableBody.innerHTML = '';
+
+            if (storedData.length === 0) {
+                alert("Tidak ada data yang tersedia!");
+                return;
+            }
+
+            // Menampilkan data dalam tabel
             storedData.forEach((data, index) => {
                 const row = tableBody.insertRow();
-                row.insertCell(0).textContent = data.name;
-                row.insertCell(1).textContent = data.email;
-                row.insertCell(2).textContent = data.phone;
-                row.insertCell(3).textContent = data.address;
-                const actionCell = row.insertCell(4);
+                row.insertCell(0).textContent = index + 1;
+                row.insertCell(1).textContent = data.name;
+                row.insertCell(2).textContent = data.email;
+                row.insertCell(3).textContent = data.phone;
+                row.insertCell(4).textContent = data.address;
 
-                // Button Hapus
+                // Tombol hapus data
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Hapus';
-                deleteButton.classList.add('delete-btn');
-                deleteButton.onclick = function() {
-                    deleteData(index);
+                deleteButton.onclick = function () {
+                    storedData.splice(index, 1); // Hapus data dari array
+                    localStorage.setItem('formData', JSON.stringify(storedData)); // Update localStorage
+                    alert('Data berhasil dihapus.');
+                    location.reload(); // Refresh halaman untuk memperbarui tabel
                 };
+                const actionCell = row.insertCell(5);
                 actionCell.appendChild(deleteButton);
             });
         });
 
-        // Fungsi untuk menghapus data
-        function deleteData(index) {
-            let storedData = JSON.parse(localStorage.getItem('formData')) || [];
-            storedData.splice(index, 1); // Hapus data berdasarkan index
-            localStorage.setItem('formData', JSON.stringify(storedData)); // Update localStorage
-
-            // Perbarui tampilan tabel
-            document.getElementById('loadDataBtn').click();
-        }
-
-        // Fungsi untuk mendownload data sebagai PDF
-        document.getElementById('downloadPdfBtn').addEventListener('click', function() {
-            const doc = new jsPDF();
+        // Download data sebagai PDF
+        document.getElementById('downloadPdfBtn').addEventListener('click', function () {
             const storedData = JSON.parse(localStorage.getItem('formData')) || [];
 
             if (storedData.length === 0) {
@@ -237,26 +161,36 @@
                 return;
             }
 
-            doc.text("Data Pendaftaran Pengguna", 14, 20);
-            let yPosition = 30;
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
 
-            storedData.forEach(data => {
-                doc.text(`Nama: ${data.name}`, 14, yPosition);
-                doc.text(`Email: ${data.email}`, 14, yPosition + 10);
-                doc.text(`Telepon: ${data.phone}`, 14, yPosition + 20);
-                doc.text(`Alamat: ${data.address}`, 14, yPosition + 30);
-                yPosition += 40;
+            doc.text("Data Pendaftaran Pengguna", 14, 10);
+
+            let startY = 20;
+            doc.text("No", 14, startY);
+            doc.text("Nama", 30, startY);
+            doc.text("Email", 80, startY);
+            doc.text("Telepon", 140, startY);
+            doc.text("Alamat", 170, startY);
+
+            startY += 10;
+            storedData.forEach((data, index) => {
+                const rowHeight = 10;
+                doc.text(String(index + 1), 14, startY);
+                doc.text(data.name, 30, startY);
+                doc.text(data.email, 80, startY);
+                doc.text(data.phone, 140, startY);
+                doc.text(data.address, 170, startY);
+                startY += rowHeight;
+
+                if (startY > 280) {
+                    doc.addPage();
+                    startY = 20;
+                }
             });
 
             doc.save("data_pendaftaran.pdf");
         });
-
-        // Logout action
-        document.getElementById('logoutBtn').addEventListener('click', function() {
-            sessionStorage.removeItem('isLoggedIn');
-            sessionStorage.removeItem('adminName');
-        });
     </script>
-
 </body>
 </html>
