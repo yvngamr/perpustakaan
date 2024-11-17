@@ -83,6 +83,7 @@
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -166,29 +167,24 @@
 
             doc.text("Data Pendaftaran Pengguna", 14, 10);
 
-            let startY = 20;
-            doc.text("No", 14, startY);
-            doc.text("Nama", 30, startY);
-            doc.text("Email", 80, startY);
-            doc.text("Telepon", 140, startY);
-            doc.text("Alamat", 170, startY);
+            // Buat tabel dengan autoTable
+            const tableData = storedData.map((data, index) => [
+                index + 1, // No
+                data.name, // Nama
+                data.email, // Email
+                data.phone, // Telepon
+                data.address // Alamat
+            ]);
 
-            startY += 10;
-            storedData.forEach((data, index) => {
-                const rowHeight = 10;
-                doc.text(String(index + 1), 14, startY);
-                doc.text(data.name, 30, startY);
-                doc.text(data.email, 80, startY);
-                doc.text(data.phone, 140, startY);
-                doc.text(data.address, 170, startY);
-                startY += rowHeight;
-
-                if (startY > 280) {
-                    doc.addPage();
-                    startY = 20;
-                }
+            doc.autoTable({
+                head: [['No', 'Nama', 'Email', 'Telepon', 'Alamat']],
+                body: tableData,
+                startY: 20,
+                styles: { cellPadding: 3, fontSize: 10 },
+                headStyles: { fillColor: [0, 123, 255] }
             });
 
+            // Simpan PDF
             doc.save("data_pendaftaran.pdf");
         });
     </script>
