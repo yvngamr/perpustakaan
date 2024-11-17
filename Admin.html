@@ -4,34 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Data Pendaftaran</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        /* Reset styles */
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            box-sizing: border-box;
         }
 
-        .container {
-            padding: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+        /* Basic styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
         }
 
-        h1 {
+        /* Navbar */
+        .navbar {
+            background-color: #1a73e8;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            color: white;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            background-color: #1558b0;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #0f4893;
+        }
+
+        /* Admin dashboard container */
+        .dashboard-container {
+            padding: 30px;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        h2 {
+            color: #1a73e8;
+            margin-bottom: 20px;
             text-align: center;
-            color: #333;
+        }
+
+        .btn {
+            background-color: #1a73e8;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #1558b0;
+        }
+
+        .table-container {
+            margin-top: 30px;
+            overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
         }
 
         table, th, td {
@@ -43,144 +100,163 @@
             text-align: left;
         }
 
-        th {
-            background-color: #f2f2f2;
-        }
-
-        .actions {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        button {
-            padding: 10px 20px;
-            cursor: pointer;
+        .action-btns button {
+            padding: 5px 10px;
+            margin: 0 5px;
             border-radius: 5px;
-            font-size: 14px;
-        }
-
-        #loadDataBtn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-        }
-
-        #downloadPdfBtn {
-            background-color: #007BFF;
-            color: white;
-            border: none;
+            cursor: pointer;
         }
 
         .delete-btn {
-            background-color: red;
+            background-color: #f44336;
             color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
         }
 
         .delete-btn:hover {
-            background-color: darkred;
+            background-color: #d32f2f;
         }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        @media (max-width: 768px) {
+            .navbar h1 {
+                font-size: 20px;
+            }
+
+            .btn {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
+            .table-container {
+                margin-top: 20px;
+            }
+
+            .dashboard-container {
+                padding: 20px;
+            }
+        }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Data Pendaftaran Pengguna</h1>
-        <div class="actions">
-            <button id="loadDataBtn">Tampilkan Data</button>
-            <button id="downloadPdfBtn">Download PDF</button>
-        </div>
 
-        <table id="dataTable">
-            <thead>
-                <tr>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>Telepon</th>
-                    <th>Alamat</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Data akan ditampilkan di sini -->
-            </tbody>
-        </table>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>Admin Dashboard</h1>
+        <a href="login.html" id="logoutBtn">Logout</a>
     </div>
 
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <h2>Data Pendaftaran Pengguna</h2>
+
+        <button class="btn" id="loadDataBtn">Tampilkan Data</button>
+        <button class="btn" id="downloadPdfBtn">Download Data (PDF)</button>
+
+        <div class="table-container">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Telepon</th>
+                        <th>Alamat</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data akan ditampilkan di sini -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Sistem Admin Perpustakaan</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <script>
-        // Fungsi untuk memuat data dari localStorage ke tabel
-        function loadData() {
+        // Cek jika pengguna sudah login
+        if (!sessionStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+
+        const adminName = sessionStorage.getItem('adminName');
+        document.querySelector('.navbar h1').innerText = `Hi, ${adminName}`;
+
+        // Menampilkan data dari localStorage
+        document.getElementById('loadDataBtn').addEventListener('click', function() {
             const storedData = JSON.parse(localStorage.getItem('formData')) || [];
             const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
-            tableBody.innerHTML = ''; // Kosongkan tabel
+            tableBody.innerHTML = ''; // Kosongkan tabel sebelumnya
 
-            if (storedData.length === 0) {
+            storedData.forEach((data, index) => {
                 const row = tableBody.insertRow();
-                const cell = row.insertCell(0);
-                cell.colSpan = 5;
-                cell.textContent = 'Tidak ada data tersedia!';
-                cell.style.textAlign = 'center';
-            } else {
-                storedData.forEach((data, index) => {
-                    const row = tableBody.insertRow();
-                    row.insertCell(0).textContent = data.name;
-                    row.insertCell(1).textContent = data.email;
-                    row.insertCell(2).textContent = data.phone;
-                    row.insertCell(3).textContent = data.address;
+                row.insertCell(0).textContent = data.name;
+                row.insertCell(1).textContent = data.email;
+                row.insertCell(2).textContent = data.phone;
+                row.insertCell(3).textContent = data.address;
+                const actionCell = row.insertCell(4);
 
-                    // Tombol Hapus
-                    const deleteCell = row.insertCell(4);
-                    const deleteBtn = document.createElement('button');
-                    deleteBtn.textContent = 'Hapus';
-                    deleteBtn.className = 'delete-btn';
-                    deleteBtn.addEventListener('click', () => deleteData(index));
-                    deleteCell.appendChild(deleteBtn);
-                });
-            }
-        }
+                // Button Hapus
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Hapus';
+                deleteButton.classList.add('delete-btn');
+                deleteButton.onclick = function() {
+                    deleteData(index);
+                };
+                actionCell.appendChild(deleteButton);
+            });
+        });
 
-        // Fungsi untuk menghapus data dari localStorage
+        // Fungsi untuk menghapus data
         function deleteData(index) {
-            const storedData = JSON.parse(localStorage.getItem('formData')) || [];
+            let storedData = JSON.parse(localStorage.getItem('formData')) || [];
             storedData.splice(index, 1); // Hapus data berdasarkan index
-            localStorage.setItem('formData', JSON.stringify(storedData)); // Perbarui localStorage
-            loadData(); // Refresh tabel
+            localStorage.setItem('formData', JSON.stringify(storedData)); // Update localStorage
+
+            // Perbarui tampilan tabel
+            document.getElementById('loadDataBtn').click();
         }
 
-        // Fungsi untuk mengunduh data sebagai PDF
-        async function downloadPDF() {
+        // Fungsi untuk mendownload data sebagai PDF
+        document.getElementById('downloadPdfBtn').addEventListener('click', function() {
+            const doc = new jsPDF();
             const storedData = JSON.parse(localStorage.getItem('formData')) || [];
+
             if (storedData.length === 0) {
-                alert("Tidak ada data untuk diunduh!");
+                alert("Tidak ada data untuk didownload.");
                 return;
             }
 
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+            doc.text("Data Pendaftaran Pengguna", 14, 20);
+            let yPosition = 30;
 
-            const headers = ["Nama", "Email", "Telepon", "Alamat"];
-            const data = storedData.map((item) => [item.name, item.email, item.phone, item.address]);
-
-            doc.text("Data Pendaftaran Pengguna", 10, 10);
-            doc.autoTable({
-                head: [headers],
-                body: data,
-                startY: 20,
-                theme: 'grid'
+            storedData.forEach(data => {
+                doc.text(`Nama: ${data.name}`, 14, yPosition);
+                doc.text(`Email: ${data.email}`, 14, yPosition + 10);
+                doc.text(`Telepon: ${data.phone}`, 14, yPosition + 20);
+                doc.text(`Alamat: ${data.address}`, 14, yPosition + 30);
+                yPosition += 40;
             });
 
             doc.save("data_pendaftaran.pdf");
-        }
+        });
 
-        // Event listeners
-        document.getElementById('loadDataBtn').addEventListener('click', loadData);
-        document.getElementById('downloadPdfBtn').addEventListener('click', downloadPDF);
-
-        // Muat data saat halaman pertama kali dimuat
-        loadData();
+        // Logout action
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('adminName');
+        });
     </script>
+
 </body>
 </html>
