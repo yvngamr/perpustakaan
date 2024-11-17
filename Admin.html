@@ -90,6 +90,28 @@
         button:hover {
             background-color: #218838;
         }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .dashboard {
+                padding: 10px;
+                margin: 10px;
+            }
+
+            table, th, td {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -107,6 +129,7 @@
         <h2>Data Pendaftaran Pengguna</h2>
 
         <button id="loadDataBtn">Tampilkan Data</button>
+        <button id="exportToPdfBtn">Konversi ke PDF</button>
 
         <table id="dataTable">
             <thead>
@@ -115,6 +138,7 @@
                     <th>Email</th>
                     <th>Telepon</th>
                     <th>Alamat</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -123,6 +147,7 @@
         </table>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         // Fungsi Logout
         function logout() {
@@ -149,6 +174,8 @@
                 const deleteCell = row.insertCell(4);
                 const deleteBtn = document.createElement('button');
                 deleteBtn.textContent = "Hapus";
+                deleteBtn.style.backgroundColor = "#dc3545";
+                deleteBtn.style.color = "white";
                 deleteBtn.onclick = function() {
                     deleteData(index); // Fungsi hapus data berdasarkan indeks
                 };
@@ -164,6 +191,35 @@
             alert("Data berhasil dihapus!");
             document.getElementById('loadDataBtn').click(); // Refresh tabel
         }
+
+        // Fungsi Ekspor Data ke PDF
+        document.getElementById('exportToPdfBtn').addEventListener('click', async function() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const storedData = JSON.parse(localStorage.getItem('formData')) || [];
+            if (storedData.length === 0) {
+                alert("Tidak ada data untuk diekspor!");
+                return;
+            }
+
+            // Judul PDF
+            doc.text("Data Pendaftaran Pengguna", 10, 10);
+
+            // Header Tabel
+            const headers = ["Nama", "Email", "Telepon", "Alamat"];
+            const data = storedData.map(item => [item.name, item.email, item.phone, item.address]);
+
+            // AutoTable untuk PDF
+            doc.autoTable({
+                head: [headers],
+                body: data,
+                startY: 20
+            });
+
+            // Simpan PDF
+            doc.save("data_pendaftaran.pdf");
+        });
     </script>
 </body>
 </html>
