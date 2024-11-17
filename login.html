@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Admin</title>
+    <style>
+        /* Resetting default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a73e8; /* Biru untuk konsisten dengan navbar admin */
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #1a73e8; /* Biru saat fokus */
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .remember-me input {
+            margin-right: 8px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #1a73e8; /* Biru untuk tombol login */
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #1558b0; /* Biru gelap untuk hover */
+        }
+
+        .login-btn:active {
+            background-color: #0f4893; /* Biru lebih gelap saat tombol ditekan */
+        }
+
+        .error-message {
+            color: #f44336;
+            text-align: center;
+            display: none;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 20px;
+            }
+
+            .login-container h2 {
+                font-size: 20px;
+            }
+
+            .login-btn {
+                font-size: 14px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login Admin</h2>
+
+        <div class="error-message" id="errorMessage">Username atau Password salah!</div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Masukkan username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div style="position: relative;">
+                    <input type="password" id="password" name="password" placeholder="Masukkan password" required>
+                    <span class="eye-icon" id="togglePassword">👁️</span>
+                </div>
+            </div>
+
+            <div class="form-group remember-me">
+                <label>
+                    <input type="checkbox" id="rememberMe"> Ingat saya
+                </label>
+                <a href="#" style="font-size: 12px; color: #1a73e8;">Lupa password?</a>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <div class="footer">
+            <p>&copy; 2024 Sistem Admin</p>
+        </div>
+    </div>
+
+    <script>
+        // Toggle visibility of password
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordField = document.getElementById('password');
+            const passwordFieldType = passwordField.type === 'password' ? 'text' : 'password';
+            passwordField.type = passwordFieldType;
+        });
+
+        // Login form submit action
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent page reload
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            // Admin credentials (for demo purposes)
+            const validUsername = 'amri';
+            const validPassword = 'admin123';
+
+            if (username === validUsername && password === validPassword) {
+                // Save login status in sessionStorage
+                sessionStorage.setItem('isLoggedIn', 'true');
+                sessionStorage.setItem('adminName', username);
+
+                // If 'Remember me' is checked, store username and password in localStorage
+                if (rememberMe) {
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('password', password);  // Store password if 'Remember me' is checked
+                } else {
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('password');
+                }
+
+                // Redirect to admin page after successful login
+                window.location.href = 'admin.html';
+            } else {
+                // Show error message if login fails
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+  </html>
